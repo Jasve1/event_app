@@ -1,5 +1,6 @@
 {
-  "name": "Jakilias",
+  "short_name": "Event",
+  "name": "Event App",
   "icons": [
     {
       "src": "favicon.ico",
