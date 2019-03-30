@@ -1,5 +1,5 @@
-# porfolio
-Portfolio of Jakob Kilias Svenningsen.
+# event_app
+This is an app where you can se what is going on in your local area.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
