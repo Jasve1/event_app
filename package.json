@@ -1,7 +1,7 @@
 {
-  "name": "event_app",
+  "name": "porfolio",
   "version": "0.1.0",
-  "description": "This is an app where you can se what is going on in your local area.",
+  "description": "Portfolio of Jakob Kilias Svenningsen",
   "private": true,
   "dependencies": {
     "node-sass": "^4.11.0",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jasve1/event_app.git"
+    "url": "git+https://github.com/Jasve1/portfolio.git"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,7 +32,7 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jasve1/event_app/issues"
+    "url": "https://github.com/Jasve1/portfolio/issues"
   },
-  "homepage": "https://github.com/Jasve1/event_app#readme"
+  "homepage": "https://github.com/Jasve1/portfolio#readme"
 }
