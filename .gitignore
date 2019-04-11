@@ -2,7 +2,7 @@
 
 # dependencies
 /server/node_modules
-/eventapp/node_modules
+/node_modules
 /.pnp
 .pnp.js
 .env
