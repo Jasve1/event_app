@@ -1,4 +1,11 @@
-$bg-color: #68aaa1;
+/*Variables*/
+$bg: linear-gradient(to bottom right, #7aa7e0, #d98ce4);
+$side-padding: 2vw;
+$width: 95vw;
+
+h2{
+  font-size: 1.5vw;
+}
 
 body {
   margin: 0;
@@ -8,10 +15,34 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $bg-color;
+  background-image: $bg;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 98vh;
+  width: 98vw;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.main-header{
+  padding: 1vw $side-padding;
+  text-align: center;
+  margin-bottom: 1vw;
+}
+main{
+  width: $width;
+  margin: auto;
+}
+
+.browse-events{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1vw;
+  .event-box{
+    background-color: rgb(248, 248, 248);
+    border-radius: 30px;
+    box-shadow: inset 1px 0px 14px 0px rgba(0,0,0,0.31);
+    padding: 1vw;
+    header{
+      padding: 0 $side-padding;
+    }
+  }
 }

@@ -36,8 +36,21 @@ app.use((req, res, next) => {
     }
 });
 
+let data = require('./eventData');
+
 /****** ROUTES *****/
 //GET
+app.get('/api/events', (req, res) => {
+    data().then(json => {
+        res.json(json);
+    })
+    .catch(() => {
+        res.json({msg: 'hey you fucked up!'});
+    })
+})
 //POST
 //PUT
 //DELETE
+
+/****** Listen ******/
+app.listen(port, () => console.log(`API running on port ${port}!`));
