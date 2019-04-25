@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BrowseEvents from './components/events/BrowseEvents';
 import AttendingEvents from './components/userEvents/AttendingEvents';
 import Navigation from './components/Navigation';
+import Event from './components/events/Event';
 
 class App extends Component {
   
@@ -31,11 +32,22 @@ class App extends Component {
     })
   }
 
+  getEventById(id){
+    let eventFound = this.state.events.find(elm => elm.id === id);
+    console.log(eventFound)
+    return eventFound;
+  }
+
+  renderEvent(props, id){
+    let event = this.getEventById(id);
+    return <Event {...props} eventData={event}/>
+  }
+
   render() {
     return (
       <Router>
         <header className="main-header">
-          <h1>The Eventship</h1> {/*place log here maybe */}
+          <h1>The Eventship</h1> {/*place logo here maybe */}
         </header>
         <main>
           <Switch>
@@ -44,6 +56,11 @@ class App extends Component {
               this.state.isLoading ? <div>Events loading...</div> :
                 <BrowseEvents {...props} eventData={this.state.events} />
             } />
+
+            <Route exact path={'/event/:id'} render={ props =>
+              this.renderEvent(props, props.match.params.id)
+            } />
+
             <Route exact path={'/attending'} render={ props => 
               <AttendingEvents {...props} /> 
             } />

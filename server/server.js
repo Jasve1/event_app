@@ -45,9 +45,18 @@ app.get('/api/events', (req, res) => {
         res.json(json);
     })
     .catch(() => {
-        res.json({msg: 'hey you fucked up!'});
+        res.json({msg: 'Can not get the requested events'});
     })
-})
+});
+app.get('/api/event/:id', (req, res) => {
+    data(req.params.id).then(json => {
+        res.json(json);
+    })
+    .catch(() => {
+        res.json({msg: 'Can not get the requested events'});
+    })
+});
+
 //POST
 //PUT
 //DELETE
