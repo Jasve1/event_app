@@ -1,0 +1,13 @@
+{
+    "events": [
+        {
+          "id": "12345",
+          "title": "This works!",
+          "category": "test",
+          "location": [
+            56.1473816,
+            10.1868114
+          ]
+        }
+      ]
+}

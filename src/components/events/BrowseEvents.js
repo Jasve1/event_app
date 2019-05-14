@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Link } from "react-router-dom";
 
 export class BrowseEvents extends Component {
-  render() {
 
+  render() {
     let eventArray = [];
     let data = this.props.eventData;
+    
     data.forEach(elm => {
         eventArray.push(
           <Link to={`/event/${elm.id}`}>
@@ -19,7 +20,14 @@ export class BrowseEvents extends Component {
         )
     });
 
+    if(eventArray <= 0){
       return (
+        <div>
+          <p>No events in your area</p>
+        </div>
+      )
+    }
+    return (
         <div className="browse-events">
           {eventArray}
         </div>
