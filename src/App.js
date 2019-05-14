@@ -39,7 +39,7 @@ class App extends Component {
   }
 
   getData(){
-    fetch('/api/events')
+    fetch('http://localhost:8080/api/events')
     .then(response => response.json())
     .then(json => {
       if(this.state.position.maxLat){
@@ -52,7 +52,7 @@ class App extends Component {
   }
 
   getAttending(){
-    fetch('/api/attending')
+    fetch('http://localhost:8080/api/attending')
     .then(response => response.json())
     .then(json => {
       this.setState({attending: json});
@@ -62,7 +62,7 @@ class App extends Component {
   }
 
   attendEvent(event){
-    fetch('/api/attend', {
+    fetch('http://localhost:8080/api/attend', {
       method: 'post',
       body: JSON.stringify({
         id: event.id,

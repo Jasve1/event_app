@@ -104,11 +104,6 @@ app.post('/api/attend', (req, res) => {
 //PUT
 //DELETE
 
-/**** Reroute all unknown requests to the React index.html ****/
-app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build/index.html'));
-});
-
 /**** Error ****/
 app.use(function (err, req, res, next) {
     console.error(err.stack)
