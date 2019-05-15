@@ -20,6 +20,9 @@ export class AttendingEvents extends Component {
         </Link>
       )
     });
+    if(events.length <= 0){
+      return <div>You are currently not attending any events</div>
+    }
     return (
       <div className="browse-events">
         {eventArray}

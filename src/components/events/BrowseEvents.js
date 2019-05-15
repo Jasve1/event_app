@@ -6,7 +6,9 @@ export class BrowseEvents extends Component {
   render() {
     let eventArray = [];
     let data = this.props.eventData;
-    
+    if(!data){
+      return <div>Events loading...</div>
+    }
     data.forEach(elm => {
         eventArray.push(
           <Link to={`/event/${elm.id}`}>

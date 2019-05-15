@@ -8,10 +8,18 @@ export class Event extends Component {
     if(!event){
       return <div>Event loading...</div>
     }
+    if(!event.attending){
+      return (
+        <div>
+          <h1>{event.title}</h1>
+          <AttendEvent attendEvent={this.props.attendEvent} event={event} changeAttendStatus={this.props.changeAttendStatus}/>
+        </div>
+      )
+    }
     return (
       <div>
         <h1>{event.title}</h1>
-        <AttendEvent attendEvent={this.props.attendEvent} event={event}/>
+        <h3>Attending event</h3>
       </div>
     )
   }

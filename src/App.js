@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import location from './utils/location';
+import eventStore from './utils/eventStore';
 
 import BrowseEvents from './components/events/BrowseEvents';
 import AttendingEvents from './components/userEvents/AttendingEvents';
@@ -14,7 +16,7 @@ class App extends Component {
     this.state = {
       events: [],
       attending: [],
-      isLoading: false,
+      isLoading: true,
       position: {
         range: null,
         minLat: null,
@@ -24,45 +26,61 @@ class App extends Component {
       }
     }
 
-    this.findRange = this.findRange.bind(this);
-    this.getLocation = this.getLocation.bind(this);
     this.attendEvent = this.attendEvent.bind(this);
     this.getAttending = this.getAttending.bind(this);
   }
 
   componentDidMount() {
     this.setState({isLoading: true});
-    console.log("App component has mounted");
-    this.getData();
+    console.log("App component has mounted"); 
     this.getAttending();
-    this.getLocation();
+    this.getData();
   }
 
   getData(){
-    fetch('/api/events')
+    fetch('http://localhost:8080/api/events')
     .then(response => response.json())
     .then(json => {
-      if(this.state.position.maxLat){
-        this.filterByPosition();
+      if(navigator.geolocation){
+        location.getLocation()
+        .then(res => {
+          this.setState({position: res})
+          this.setState({events: location.filterByPosition(json.results, this.state.position), isLoading: false})
+        })
       }
-      this.setState({events: json.results})
-      this.setState({isLoading: false});
+      this.setState({events: json.results});
+    })
+    .then(() => {
       console.log(this.state.events);
+      this.state.attending.forEach(attend => {
+        this.findAttending(attend.id);
+      });
+      this.setState({isLoading: false});
     })
   }
 
   getAttending(){
-    fetch('/api/attending')
-    .then(response => response.json())
-    .then(json => {
-      this.setState({attending: json});
-      this.setState({isLoading: false});
-      console.log(json);
+    eventStore.getEvents()
+    .then(res => {
+      this.setState({attending: res});
     })
   }
 
+  findAttending = (id) => {
+    this.state.events.forEach(event => {
+      if(event.id === id){
+        event["attending"] = true;
+        console.log(event);
+      }
+    })
+  }
+
+  changeAttendStatus = (event) => {
+    event["attending"] = true;
+  }
+
   attendEvent(event){
-    fetch('/api/attend', {
+    fetch('http://localhost:8080/api/attend', {
       method: 'post',
       body: JSON.stringify({
         id: event.id,
@@ -78,9 +96,8 @@ class App extends Component {
       }
     })
     .then(response => response.json())
-    .then(json => {
+    .then(() => {
       this.getAttending();
-      console.log(json);
     })
   }
 
@@ -91,52 +108,11 @@ class App extends Component {
 
   renderEvent(props, id){
     let event = this.getEventById(id);
-    return <Event {...props} eventData={event} attendEvent={this.attendEvent}/>
-  }
-
-  getLocation(){
-    return new Promise((res, rej) => {
-      if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(this.findRange);
-        res(this.state.position);
-      }
-      else{
-        console.log('Geolocation is not supported');
-        res(null);
-      }
-    });
-  }
-  
-  findRange(position) {
-    let range = 0.04;
-    let lat = position.coords.latitude;
-    let long = position.coords.longitude;
-    let minLat = lat - range;
-    let maxLat = lat + range;
-    let minLong = long - range;
-    let maxLong = long + range;
-
-    this.setState({
-      position: {
-        range: range,
-        minLat: minLat,
-        maxLat: maxLat,
-        minLong: minLong,
-        maxLong: maxLong
-      }
-    })
-    console.log(this.state.position)
-  }
-
-  filterByPosition = () => {
-    this.getLocation()
-      .then((position) => {
-        let events = this.state.events.filter(event => 
-          event.location[0] >= position.minLat && event.location[0] <= position.maxLat
-          && event.location[1] >= position.minLong && event.location[1] <= position.maxLong
-        )
-        this.setState({events: events, isLoading: false});
-      })
+    return <Event {...props} 
+                eventData={event} 
+                attendEvent={this.attendEvent} 
+                changeAttendStatus={this.changeAttendStatus}
+            />
   }
 
   render() {

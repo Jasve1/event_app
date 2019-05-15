@@ -99,3 +99,29 @@ footer{
     }
   }
 }
+
+
+.offline{
+  .main-header::after{
+    content: "You are currently offline. Events might not be up to date";
+    display: block;
+    color: #e9bcff;
+    font-weight: bold;
+    padding: 1vw 0.5vw;
+    margin-top: 1vw;
+    background-color: #00000040;
+    border-radius: 15px;
+    animation: bounce 1s cubic-bezier(1,-0.59,.02,1.46);
+  }
+}
+
+@keyframes bounce{
+  0%{
+      transform: scale(0);
+      opacity: 0;
+  }
+  100%{
+      transform: scale(1);
+      opacity: 1;
+  }
+}

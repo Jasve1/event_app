@@ -11,6 +11,7 @@ self.addEventListener('fetch', async (event) => {
     return cachedResponse || fetch(event.request);
 });
 
+//Custom caching strategy
 function networkFallingBackToCacheWFU(event){
     event.respondWith(
         caches.open(cache_name).then(cache => {
@@ -18,6 +19,9 @@ function networkFallingBackToCacheWFU(event){
                 cache.put(event.request, networkResponse.clone());
                 return networkResponse;
             }).catch(() => {
+                self.clients.get(event.clientId).then(client => {
+                    client.postMessage("currently-offline");
+                })
                 return caches.match(event.request);
             })
         })
