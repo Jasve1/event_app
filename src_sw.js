@@ -11,6 +11,28 @@ self.addEventListener('fetch', async (event) => {
     return cachedResponse || fetch(event.request);
 });
 
+const showNotification = () => {
+    self.registration.showNotification('Post Sent', {
+        body: 'You are back online and your post was successfully sent!',
+    });
+};
+
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('EventQueue', {
+    maxRetentionTime: 24 * 60, // Retry for max of 24 Hours
+
+    callbacks: {
+        queueDidReplay: showNotification
+    }
+});
+
+workbox.routing.registerRoute(
+    '/api/events',
+    new workbox.strategies.networkFallingBackToCacheWFU({
+        plugins: [bgSyncPlugin]
+    }),
+    'POST'
+);
+
 function networkFallingBackToCacheWFU(event){
     event.respondWith(
         caches.open(cache_name).then(cache => {

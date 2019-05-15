@@ -6,21 +6,23 @@ export class AttendEvent extends Component {
     this.props.attendEvent(this.props.event);
     this.succes();
   }
-  succes = () => {
+
+  success = () => {
     return (
       <div>
         <h2>Attending event</h2>
       </div>
     )
   }
+
   render() {
     return (
       <div>
         <button onClick={this.handleAttend}>Attend event</button>
-        {this.succes}
+        {this.success}
       </div>
     )
   }
 }
 
-export default AttendEvent
+export default AttendEvent;
