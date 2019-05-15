@@ -26,8 +26,8 @@ const bgSyncPlugin = new workbox.backgroundSync.Plugin('EventQueue', {
 });
 
 workbox.routing.registerRoute(
-    '/api/events',
-    new workbox.strategies.networkFallingBackToCacheWFU({
+    '/api/attend',
+    new workbox.strategies.NetworkOnly({
         plugins: [bgSyncPlugin]
     }),
     'POST'
