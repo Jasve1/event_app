@@ -4,7 +4,7 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox
 const cache_name = 'events_cache_v2';
 
 self.addEventListener('fetch', async (event) => {
-    if(event.request.url.endsWith('/api/events') || event.request.url.endsWith('/api/attending')){
+    if (event.request.url.endsWith('/api/events') || event.request.url.endsWith('/api/attending')) {
         networkFallingBackToCacheWFU(event)
     }
     const cachedResponse = await caches.match(event.request);
@@ -33,7 +33,7 @@ workbox.routing.registerRoute(
     'POST'
 );
 
-function networkFallingBackToCacheWFU(event){
+function networkFallingBackToCacheWFU(event) {
     event.respondWith(
         caches.open(cache_name).then(cache => {
             return fetch(event.request).then(networkResponse => {
