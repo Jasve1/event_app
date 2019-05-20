@@ -1,4 +1,4 @@
-const DB_VERSION = 2;
+const DB_VERSION = 4;
 const DB_NAME = "attending-events";
 
 function openDatabase() {
@@ -25,7 +25,7 @@ function openDatabase() {
                 eventStore = db.createObjectStore('events',
                     { "keyPath": "id" }
                 );
-            } else{
+            }else{
                 eventStore = upgradeTransaction.objectStore('events');
             }
 
@@ -58,12 +58,18 @@ function addToObjectStore(storeName, object){
     });
 };
 
-function getEvents(){
+function getEvents(indexName, indexValue){
     return new Promise((res, rej) => {
         openDatabase().then(db => {
             let objectStore = openObjectStore(db, "events");
             let events = [];
-            objectStore.openCursor().onsuccess = (e) => {
+            let cursor;
+            if(indexName && indexValue){
+                cursor = objectStore.index(indexName).openCursor(indexValue);
+            } else{
+                cursor = objectStore.openCursor();
+            }
+            cursor.onsuccess = (e) => {
                 let cursor = e.target.result;
                 if(cursor){
                     events.push(cursor.value);

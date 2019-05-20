@@ -70,16 +70,12 @@ class App extends Component {
     this.state.events.forEach(event => {
       if(event.id === id){
         event["attending"] = true;
-        console.log(event);
       }
     })
   }
 
-  changeAttendStatus = (event) => {
-    event["attending"] = true;
-  }
-
   attendEvent(event){
+    this.findAttending(event.id)
     fetch('http://localhost:8080/api/attend', {
       method: 'post',
       body: JSON.stringify({
@@ -111,7 +107,7 @@ class App extends Component {
     return <Event {...props} 
                 eventData={event} 
                 attendEvent={this.attendEvent} 
-                changeAttendStatus={this.changeAttendStatus}
+                findAttending={this.findAttending}
             />
   }
 

@@ -12,7 +12,11 @@ export class Event extends Component {
       return (
         <div>
           <h1>{event.title}</h1>
-          <AttendEvent attendEvent={this.props.attendEvent} event={event} changeAttendStatus={this.props.changeAttendStatus}/>
+          <AttendEvent 
+            attendEvent={this.props.attendEvent} 
+            event={event}
+            findAttending={this.props.findAttending}
+          />
         </div>
       )
     }

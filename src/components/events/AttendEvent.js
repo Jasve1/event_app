@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import eventStore from '../../utils/eventStore';
 
 export class AttendEvent extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      isAttending: false
+    }
+  }
   
   handleAttend = (e) => {
     e.preventDefault();
@@ -16,34 +23,28 @@ export class AttendEvent extends Component {
       status: "sendt"
     }
 
-    this.props.changeAttendStatus(this.props.event);
+    this.setState({isAttending: true})
 
     eventStore.addToObjectStore("events", attendEvent)
     .then(res => {
       console.log(res);
-    })
+      this.props.findAttending(this.props.event.id);
+    });
+
     this.props.attendEvent(attendEvent);
-
-
-    //Trigger bgSync if supported
-    // if("serviceWorker" in navigator && "SyncManager" in window){
-    //   this.triggerEventQueueUpdate()
-    // }else{
-    //   this.props.attendEvent(attendEvent);
-    // }
     
   }
-
-  // triggerEventQueueUpdate = () => {
-  //   navigator.serviceWorker.ready.then(reg => {
-  //       reg.sync.register("event-queue-sync");
-  //     });
-  // }
-
   render() {
+    if(!this.state.isAttending){
+      return (
+        <div>
+          <button onClick={this.handleAttend}>Attend event</button>
+        </div>
+      )
+    }
     return (
       <div>
-        <button onClick={this.handleAttend}>Attend event</button>
+        <h3>Request sendt!</h3>
       </div>
     )
   }
