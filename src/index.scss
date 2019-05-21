@@ -125,3 +125,25 @@ footer{
       opacity: 1;
   }
 }
+
+@media only screen and (orientation: portrait) {
+  .browse-events {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 4vw;
+  }
+
+  .browse-events .event-box {
+    border-radius: 11px;
+    padding: 2vw;
+  }
+
+  h2 {
+    font-size: 2.5vw;
+  }
+  h3 {
+    font-size: 2.5vw;
+  }
+  p {
+    font-size: 1.5vw;
+  }
+}
