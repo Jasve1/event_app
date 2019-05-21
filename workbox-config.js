@@ -1,8 +1,8 @@
 module.exports = {
-  "globDirectory": "build/",
+  "globDirectory": "the-event-ship.herokuapp.com/",
   "globPatterns": [
     "**/*.{json,html,js,css,png}"
   ],
-  "swDest": "build\\sw.js",
+  "swDest": "the-event-ship.herokuapp.com\\sw.js",
   "swSrc": "src_sw.js"
 };
