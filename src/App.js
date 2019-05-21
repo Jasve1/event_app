@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   getData(){
-    fetch('http://localhost:8080/api/events')
+    fetch('/api/events')
     .then(response => response.json())
     .then(json => {
       if(navigator.geolocation){
@@ -76,7 +76,7 @@ class App extends Component {
 
   attendEvent(event){
     this.findAttending(event.id)
-    fetch('http://localhost:8080/api/attend', {
+    fetch('/api/attend', {
       method: 'post',
       body: JSON.stringify({
         id: event.id,

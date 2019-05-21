@@ -103,7 +103,7 @@ function getEvents(indexName, indexValue){
 //Get events marked "attending" from server
 function getEventsFromServer(){
     return new Promise((res, rej) => {
-        fetch('http://localhost:8080/api/attending')
+        fetch('/api/attending')
         .then(response => response.json())
         .then(json => {
             res(json);
