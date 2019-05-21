@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const Schema = mongoose.Schema;
 
 /****** DATABASE *****/
-mongoose.connect(process.env.LOCAL_DB, {useNewUrlParser: true});
+mongoose.connect(process.env.CONNECTION_STRING, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
