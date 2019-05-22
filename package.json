@@ -4,6 +4,7 @@
   "description": "This is an app where you can se what is going on in your local area.",
   "private": true,
   "dependencies": {
+    "app-root-path": "^2.2.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
