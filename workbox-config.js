@@ -1,8 +1,9 @@
+const path = require('path');
 module.exports = {
   "globDirectory": "build/",
   "globPatterns": [
     "**/*.{json,html,js,css,png}"
   ],
-  "swDest": '/sw.js',
+  "swDest": path.join(__dirname, 'sw.js'),
   "swSrc": "src/sw.js"
 };
