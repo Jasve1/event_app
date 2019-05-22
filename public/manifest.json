@@ -1,6 +1,7 @@
 {
   "name": "The EventShip",
   "short_name": "EventShip",
+  "description": "Find events in your local area",
   "theme_color": "#6a1e9c",
   "background_color": "#bbb2da",
   "display": "fullscreen",
