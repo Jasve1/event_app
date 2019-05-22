@@ -4,6 +4,6 @@ module.exports = {
   "globPatterns": [
     "**/*.{json,html,js,css,png}"
   ],
-  "swDest": path.join(__dirname, 'sw.js'),
-  "swSrc": "src/sw.js"
+  "swDest": path.join(__dirname, 'service-worker.js'),
+  "swSrc": "src/service-worker.js"
 };
