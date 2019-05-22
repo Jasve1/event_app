@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "preinstall": "cd server && npm install && workbox injectManifest"
+    "preinstall": "workbox injectManifest && cd server && npm install"
   },
   "repository": {
     "type": "git",
