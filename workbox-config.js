@@ -1,8 +1,8 @@
 module.exports = {
-  "globDirectory": "build/",
+  "globDirectory": "/",
   "globPatterns": [
     "**/*.{json,html,js,css,png}"
   ],
-  "swDest": "build\\sw.js",
+  "swDest": "sw.js",
   "swSrc": "src/sw.js"
 };
