@@ -1,4 +1,4 @@
-const DB_VERSION = 4;
+const DB_VERSION = 5;
 const DB_NAME = "attending-events";
 
 function openDatabase() {

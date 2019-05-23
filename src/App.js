@@ -41,13 +41,6 @@ class App extends Component {
     fetch('/api/events')
     .then(response => response.json())
     .then(json => {
-      if(navigator.geolocation){
-        location.getLocation()
-        .then(res => {
-          this.setState({position: res})
-          this.setState({events: location.filterByPosition(json.results, this.state.position), isLoading: false})
-        })
-      }
       this.setState({events: json.results});
     })
     .then(() => {
@@ -111,15 +104,25 @@ class App extends Component {
             />
   }
 
+  handleClickLocation = () => {
+    if(navigator.geolocation){
+      location.getLocation()
+      .then(res => {
+        this.setState({position: res})
+        this.setState({events: location.filterByPosition(this.state.events, this.state.position), isLoading: false})
+      })
+    }
+  }
+
   render() {
     return (
       <Router>
         <header className="main-header">
           <h1>The Eventship</h1> {/*place logo here maybe */}
         </header>
+        <button onClick={this.handleClickLocation}>Find events in your area</button>
         <main>
           <Switch>
-
             <Route exact path={'/'} render={ props =>
               this.state.isLoading ? <div>Events loading...</div> :
                 <BrowseEvents {...props} eventData={this.state.events} position={this.state.position}/>

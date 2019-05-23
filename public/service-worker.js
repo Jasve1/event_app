@@ -1,7 +1,7 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
 
 //Custom adjustments
-const cache_name = 'events_cache_v3';
+const cache_name = 'events_cache_v4';
 const queue = new workbox.backgroundSync.Queue('attendQueue');
 
 self.addEventListener('fetch', async (e) => {
